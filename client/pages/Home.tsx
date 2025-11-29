@@ -166,7 +166,8 @@ export default function Home() {
                 </h3>
                 <p className="text-muted-foreground text-sm">
                   Upload photos, describe the problem, and mark the exact
-                  location on the map. Issues are immediately sent to authorities.
+                  location on the map. Issues are immediately sent to
+                  authorities.
                 </p>
               </div>
             </div>
@@ -300,8 +301,8 @@ export default function Home() {
               Ready to Make a Difference?
             </h2>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              Join thousands of citizens creating transparency and accountability
-              in government services.
+              Join thousands of citizens creating transparency and
+              accountability in government services.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/register">

@@ -52,20 +52,13 @@ export const handleCreateComplaint: RequestHandler = (req, res) => {
       return;
     }
 
-    const {
-      title,
-      description,
-      category,
-      location,
-    } = req.body as CreateComplaintRequest;
+    const { title, description, category, location } =
+      req.body as CreateComplaintRequest;
 
     if (!title || !description || !category || !location) {
-      res
-        .status(400)
-        .json({
-          message:
-            "Title, description, category, and location are required",
-        });
+      res.status(400).json({
+        message: "Title, description, category, and location are required",
+      });
       return;
     }
 

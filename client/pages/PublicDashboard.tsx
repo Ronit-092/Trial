@@ -22,7 +22,9 @@ export default function PublicDashboard() {
   const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [filter, setFilter] = useState<"all" | "pending" | "in-progress" | "resolved">("all");
+  const [filter, setFilter] = useState<
+    "all" | "pending" | "in-progress" | "resolved"
+  >("all");
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -60,7 +62,9 @@ export default function PublicDashboard() {
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -113,23 +117,17 @@ export default function PublicDashboard() {
   };
 
   const filteredComplaints = complaints.filter((c) =>
-    filter === "all" ? true : c.status === filter
+    filter === "all" ? true : c.status === filter,
   );
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "pending":
-        return (
-          <AlertCircle className="w-5 h-5 text-warning" />
-        );
+        return <AlertCircle className="w-5 h-5 text-warning" />;
       case "in-progress":
-        return (
-          <Clock className="w-5 h-5 text-pending" />
-        );
+        return <Clock className="w-5 h-5 text-pending" />;
       case "resolved":
-        return (
-          <CheckCircle2 className="w-5 h-5 text-success" />
-        );
+        return <CheckCircle2 className="w-5 h-5 text-success" />;
       default:
         return null;
     }
@@ -163,7 +161,11 @@ export default function PublicDashboard() {
               File complaints about civic issues in your area
             </p>
           </div>
-          <Button onClick={() => setShowForm(!showForm)} size="lg" className="gap-2">
+          <Button
+            onClick={() => setShowForm(!showForm)}
+            size="lg"
+            className="gap-2"
+          >
             <Plus className="w-4 h-4" />
             New Complaint
           </Button>
@@ -313,28 +315,30 @@ export default function PublicDashboard() {
         <div className="bg-white rounded-xl border border-border p-4 mb-8">
           <div className="flex items-center gap-2 mb-4">
             <Filter className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-medium text-foreground">Filter by Status</span>
+            <span className="text-sm font-medium text-foreground">
+              Filter by Status
+            </span>
           </div>
           <div className="flex flex-wrap gap-2">
-            {(
-              ["all", "pending", "in-progress", "resolved"] as const
-            ).map((status) => (
-              <button
-                key={status}
-                onClick={() => setFilter(status)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                  filter === status
-                    ? "bg-primary text-white"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                }`}
-              >
-                {status === "all"
-                  ? "All Complaints"
-                  : status === "in-progress"
-                    ? "In Progress"
-                    : status.charAt(0).toUpperCase() + status.slice(1)}
-              </button>
-            ))}
+            {(["all", "pending", "in-progress", "resolved"] as const).map(
+              (status) => (
+                <button
+                  key={status}
+                  onClick={() => setFilter(status)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                    filter === status
+                      ? "bg-primary text-white"
+                      : "bg-muted text-muted-foreground hover:bg-muted/80"
+                  }`}
+                >
+                  {status === "all"
+                    ? "All Complaints"
+                    : status === "in-progress"
+                      ? "In Progress"
+                      : status.charAt(0).toUpperCase() + status.slice(1)}
+                </button>
+              ),
+            )}
           </div>
         </div>
 
@@ -348,7 +352,9 @@ export default function PublicDashboard() {
             <AlertCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
             <p className="text-muted-foreground mb-4">No complaints found</p>
             {!showForm && (
-              <Button onClick={() => setShowForm(true)}>File a Complaint</Button>
+              <Button onClick={() => setShowForm(true)}>
+                File a Complaint
+              </Button>
             )}
           </div>
         ) : (
@@ -380,12 +386,14 @@ export default function PublicDashboard() {
                       </div>
                       <div
                         className={`flex items-center gap-1 px-3 py-1 rounded-full ${getStatusColor(
-                          complaint.status
+                          complaint.status,
                         )}`}
                       >
                         {getStatusIcon(complaint.status)}
                         <span className="text-sm font-medium capitalize">
-                          {complaint.status === "in-progress" ? "In Progress" : complaint.status}
+                          {complaint.status === "in-progress"
+                            ? "In Progress"
+                            : complaint.status}
                         </span>
                       </div>
                     </div>
@@ -413,7 +421,10 @@ export default function PublicDashboard() {
                           Latest Update:
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          {complaint.updates[complaint.updates.length - 1].message}
+                          {
+                            complaint.updates[complaint.updates.length - 1]
+                              .message
+                          }
                         </p>
                       </div>
                     )}

@@ -21,10 +21,16 @@ export default function GovernmentDashboard() {
   const [user, setUser] = useState<any>(null);
   const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<"all" | "pending" | "in-progress" | "resolved">("all");
-  const [selectedComplaint, setSelectedComplaint] = useState<Complaint | null>(null);
+  const [filter, setFilter] = useState<
+    "all" | "pending" | "in-progress" | "resolved"
+  >("all");
+  const [selectedComplaint, setSelectedComplaint] = useState<Complaint | null>(
+    null,
+  );
   const [updateMessage, setUpdateMessage] = useState("");
-  const [newStatus, setNewStatus] = useState<"pending" | "in-progress" | "resolved">("pending");
+  const [newStatus, setNewStatus] = useState<
+    "pending" | "in-progress" | "resolved"
+  >("pending");
   const [stats, setStats] = useState({
     total: 0,
     pending: 0,
@@ -65,10 +71,11 @@ export default function GovernmentDashboard() {
         pending: allComplaints.filter((c: Complaint) => c.status === "pending")
           .length,
         inProgress: allComplaints.filter(
-          (c: Complaint) => c.status === "in-progress"
+          (c: Complaint) => c.status === "in-progress",
         ).length,
-        resolved: allComplaints.filter((c: Complaint) => c.status === "resolved")
-          .length,
+        resolved: allComplaints.filter(
+          (c: Complaint) => c.status === "resolved",
+        ).length,
       });
     } catch (error) {
       console.error("Error fetching complaints:", error);
@@ -106,7 +113,7 @@ export default function GovernmentDashboard() {
   };
 
   const filteredComplaints = complaints.filter((c) =>
-    filter === "all" ? true : c.status === filter
+    filter === "all" ? true : c.status === filter,
   );
 
   const getStatusIcon = (status: string) => {
@@ -225,7 +232,8 @@ export default function GovernmentDashboard() {
               />
             </div>
             <p className="text-sm text-muted-foreground mt-2">
-              {((stats.resolved / stats.total) * 100).toFixed(1)}% of complaints resolved
+              {((stats.resolved / stats.total) * 100).toFixed(1)}% of complaints
+              resolved
             </p>
           </div>
         )}
@@ -234,28 +242,30 @@ export default function GovernmentDashboard() {
         <div className="bg-white rounded-xl border border-border p-4 mb-8">
           <div className="flex items-center gap-2 mb-4">
             <Filter className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-medium text-foreground">Filter by Status</span>
+            <span className="text-sm font-medium text-foreground">
+              Filter by Status
+            </span>
           </div>
           <div className="flex flex-wrap gap-2">
-            {(
-              ["all", "pending", "in-progress", "resolved"] as const
-            ).map((status) => (
-              <button
-                key={status}
-                onClick={() => setFilter(status)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                  filter === status
-                    ? "bg-primary text-white"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                }`}
-              >
-                {status === "all"
-                  ? "All"
-                  : status === "in-progress"
-                    ? "In Progress"
-                    : status.charAt(0).toUpperCase() + status.slice(1)}
-              </button>
-            ))}
+            {(["all", "pending", "in-progress", "resolved"] as const).map(
+              (status) => (
+                <button
+                  key={status}
+                  onClick={() => setFilter(status)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                    filter === status
+                      ? "bg-primary text-white"
+                      : "bg-muted text-muted-foreground hover:bg-muted/80"
+                  }`}
+                >
+                  {status === "all"
+                    ? "All"
+                    : status === "in-progress"
+                      ? "In Progress"
+                      : status.charAt(0).toUpperCase() + status.slice(1)}
+                </button>
+              ),
+            )}
           </div>
         </div>
 
@@ -267,7 +277,9 @@ export default function GovernmentDashboard() {
         ) : filteredComplaints.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-xl border border-border">
             <CheckCircle2 className="w-12 h-12 text-success mx-auto mb-4 opacity-50" />
-            <p className="text-muted-foreground">No complaints in this category</p>
+            <p className="text-muted-foreground">
+              No complaints in this category
+            </p>
           </div>
         ) : (
           <div className="grid gap-4">
@@ -298,7 +310,7 @@ export default function GovernmentDashboard() {
                       </div>
                       <div
                         className={`flex items-center gap-1 px-3 py-1 rounded-full ${getStatusColor(
-                          complaint.status
+                          complaint.status,
                         )}`}
                       >
                         {getStatusIcon(complaint.status)}
@@ -323,7 +335,9 @@ export default function GovernmentDashboard() {
                       </span>
                       <span>
                         Reported by:{" "}
-                        <span className="font-medium">{complaint.createdBy}</span>
+                        <span className="font-medium">
+                          {complaint.createdBy}
+                        </span>
                       </span>
                       <span>
                         {new Date(complaint.createdAt).toLocaleDateString()}
@@ -386,9 +400,7 @@ export default function GovernmentDashboard() {
                   <select
                     id="status"
                     value={newStatus}
-                    onChange={(e) =>
-                      setNewStatus(e.target.value as any)
-                    }
+                    onChange={(e) => setNewStatus(e.target.value as any)}
                     className="mt-1 w-full px-3 py-2 border border-input rounded-md text-foreground bg-background"
                   >
                     <option value="pending">Pending</option>
@@ -413,9 +425,7 @@ export default function GovernmentDashboard() {
 
                 <div className="flex gap-3 pt-4">
                   <Button
-                    onClick={() =>
-                      handleUpdateStatus(selectedComplaint.id)
-                    }
+                    onClick={() => handleUpdateStatus(selectedComplaint.id)}
                     className="flex-1"
                   >
                     Update

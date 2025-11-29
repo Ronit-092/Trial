@@ -33,7 +33,8 @@ const NotFound = () => {
             Page Not Found
           </h2>
           <p className="text-muted-foreground mb-8">
-            The page you're looking for doesn't exist. Let's get you back on track.
+            The page you're looking for doesn't exist. Let's get you back on
+            track.
           </p>
           <Link to="/">
             <Button size="lg" className="gap-2">

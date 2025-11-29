@@ -68,7 +68,9 @@ export function Layout({ children, user, onLogout }: LayoutProps) {
                 )}
                 <div className="flex items-center gap-2 ml-4 pl-4 border-l border-border">
                   <div className="text-sm">
-                    <div className="font-medium text-foreground">{user.name}</div>
+                    <div className="font-medium text-foreground">
+                      {user.name}
+                    </div>
                     <div className="text-xs text-muted-foreground">
                       {user.userType === "government"
                         ? "Government Official"
@@ -146,7 +148,9 @@ export function Layout({ children, user, onLogout }: LayoutProps) {
                     </Link>
                   )}
                   <div className="px-4 py-2 text-sm">
-                    <div className="font-medium text-foreground">{user.name}</div>
+                    <div className="font-medium text-foreground">
+                      {user.name}
+                    </div>
                     <div className="text-xs text-muted-foreground">
                       {user.userType === "government"
                         ? "Government Official"
@@ -170,7 +174,9 @@ export function Layout({ children, user, onLogout }: LayoutProps) {
                     </Button>
                   </Link>
                   <Link to="/register">
-                    <Button className="w-full justify-start">Get Started</Button>
+                    <Button className="w-full justify-start">
+                      Get Started
+                    </Button>
                   </Link>
                 </>
               )}
@@ -179,9 +185,7 @@ export function Layout({ children, user, onLogout }: LayoutProps) {
         )}
       </header>
 
-      <main className="flex-1">
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
 
       <footer className="bg-slate-900 text-white border-t border-border mt-20">
         <div className="container mx-auto px-4 py-12">
@@ -207,7 +211,10 @@ export function Layout({ children, user, onLogout }: LayoutProps) {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/public" className="hover:text-white transition">
+                  <Link
+                    to="/dashboard/public"
+                    className="hover:text-white transition"
+                  >
                     File Complaint
                   </Link>
                 </li>
@@ -217,7 +224,10 @@ export function Layout({ children, user, onLogout }: LayoutProps) {
               <h4 className="font-semibold mb-4">For Government</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li>
-                  <Link to="/dashboard/government" className="hover:text-white transition">
+                  <Link
+                    to="/dashboard/government"
+                    className="hover:text-white transition"
+                  >
                     Government Portal
                   </Link>
                 </li>

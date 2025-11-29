@@ -204,7 +204,10 @@ export default function Register() {
               </div>
 
               <div>
-                <Label htmlFor="confirmPassword" className="text-sm font-medium">
+                <Label
+                  htmlFor="confirmPassword"
+                  className="text-sm font-medium"
+                >
                   Confirm Password
                 </Label>
                 <div className="relative mt-1">

@@ -7,7 +7,7 @@ export const handleGetStats: RequestHandler = (req, res) => {
     const allComplaints = Array.from(store.complaints.values());
     const totalComplaints = allComplaints.length;
     const resolvedComplaints = allComplaints.filter(
-      (c) => c.status === "resolved"
+      (c) => c.status === "resolved",
     ).length;
 
     res.json({
