@@ -1,8 +1,6 @@
 import { RequestHandler } from "express";
 import { LoginRequest, RegisterRequest, AuthResponse, User } from "@shared/api";
-
-// Mock user storage (in production, use a database)
-const users: Map<string, User & { password: string }> = new Map();
+import store from "../store";
 
 // Mock JWT token generation (in production, use jsonwebtoken)
 function generateToken(userId: string): string {
@@ -23,9 +21,9 @@ export const handleLogin: RequestHandler = (req, res) => {
       return;
     }
 
-    // Mock authentication - find user
+    // Find user
     let foundUser: (User & { password: string }) | undefined;
-    for (const user of users.values()) {
+    for (const user of store.users.values()) {
       if (user.email === email) {
         foundUser = user;
         break;
@@ -68,7 +66,7 @@ export const handleRegister: RequestHandler = (req, res) => {
     }
 
     // Check if email already exists
-    for (const user of users.values()) {
+    for (const user of store.users.values()) {
       if (user.email === email) {
         res.status(409).json({ message: "Email already exists" });
         return;
@@ -85,7 +83,7 @@ export const handleRegister: RequestHandler = (req, res) => {
       createdAt: new Date().toISOString(),
     };
 
-    users.set(userId, newUser);
+    store.users.set(userId, newUser);
 
     const { password: _, ...userWithoutPassword } = newUser;
     const token = generateToken(userId);
