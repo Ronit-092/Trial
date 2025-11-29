@@ -9,10 +9,7 @@ import {
   handleGetComplaint,
   handleUpdateComplaint,
 } from "./routes/complaints";
-import { handleGetStats, setComplaints } from "./routes/stats";
-
-// Store complaints map to be shared with stats route
-const complaintsMap = new Map();
+import { handleGetStats } from "./routes/stats";
 
 export function createServer() {
   const app = express();
@@ -21,9 +18,6 @@ export function createServer() {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-
-  // Share complaints with stats module
-  setComplaints(complaintsMap);
 
   // Example API routes
   app.get("/api/ping", (_req, res) => {
