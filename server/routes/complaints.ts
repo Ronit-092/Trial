@@ -6,9 +6,7 @@ import {
   UpdateComplaintRequest,
   UpdateComplaintStatusResponse,
 } from "@shared/api";
-
-// Mock complaint storage
-const complaints: Map<string, Complaint> = new Map();
+import store from "../store";
 
 // Mock auth middleware - in production use real JWT validation
 export function extractUserId(req: any): string | null {
@@ -35,7 +33,7 @@ export const handleGetComplaints: RequestHandler = (req, res) => {
       return;
     }
 
-    const allComplaints = Array.from(complaints.values());
+    const allComplaints = Array.from(store.complaints.values());
 
     res.json({
       complaints: allComplaints,
@@ -90,7 +88,7 @@ export const handleCreateComplaint: RequestHandler = (req, res) => {
       imageUrl: req.body.imageUrl,
     };
 
-    complaints.set(complaintId, newComplaint);
+    store.complaints.set(complaintId, newComplaint);
 
     res.status(201).json({
       complaint: newComplaint,
@@ -109,7 +107,7 @@ export const handleGetComplaint: RequestHandler = (req, res) => {
     }
 
     const { id } = req.params;
-    const complaint = complaints.get(id);
+    const complaint = store.complaints.get(id);
 
     if (!complaint) {
       res.status(404).json({ message: "Complaint not found" });
@@ -133,7 +131,7 @@ export const handleUpdateComplaint: RequestHandler = (req, res) => {
     const { id } = req.params;
     const { status, message } = req.body as UpdateComplaintRequest;
 
-    const complaint = complaints.get(id);
+    const complaint = store.complaints.get(id);
     if (!complaint) {
       res.status(404).json({ message: "Complaint not found" });
       return;
@@ -151,7 +149,7 @@ export const handleUpdateComplaint: RequestHandler = (req, res) => {
       });
     }
 
-    complaints.set(id, complaint);
+    store.complaints.set(id, complaint);
 
     res.json({
       complaint,
